@@ -45,6 +45,15 @@ https://capacitorjs.com/docs/guides/splash-screens-and-icons
 https://www.npmjs.com/package/capacitor-resources
 https://gist.github.com/dalezak/a6b1de39091f4ace220695d72717ac71
 
+# Cambiar tamaño de imagenes
+https://anytools.pro/en/img/editor/resize1024
+
+# Iconos gratis
+https://www.flaticon.com/search?word=money&order_by=4
+
+#  Haver politicas de privacidad
+
+
 
 # Cambiar versionamiento
 
