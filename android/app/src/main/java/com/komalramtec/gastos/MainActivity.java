@@ -1,4 +1,4 @@
-package com.komalramtec.presupuesto;
+package com.komalramtec.gastos;
 
 import com.getcapacitor.BridgeActivity;
 

@@ -5,31 +5,32 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-card class="ion-no-margin ion-padding"  >
+  <!-- AGREGAR PRESUPUESTO -->
+  <ion-card class="ion-no-margin ion-padding">
     <ion-card-header>
       <ion-card-title color="success">{{storageService.localPresupuesto | currency}}</ion-card-title>
       <ion-card-subtitle >Presupuesto total</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
       <ion-item>
-        <ion-label class="ion-text-wrap">Label</ion-label>
+        <ion-label class="ion-text-wrap">
          Agrega / Actualiza presupuesto de acuerdo a como vayas obteniendolo;
          Ingresa el monto y luego haz clic en el botón aceptar.
-         Haz clic en reiniciar si desear comenzar presupuesto desde 0.
+         Haz clic en reiniciar si desear comenzar presupuesto desde 0.</ion-label>
 
       </ion-item>
 
 
       <ion-item >
         <ion-label position="stacked">Descripción</ion-label>
-        <ion-input type="text" maxlength="10" placeholder="Ingresa detalle" [(ngModel)]="detalle"></ion-input>
+        <ion-input type="text" maxlength="20" placeholder="Ingresa detalle" [(ngModel)]="detalle"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="stacked">Agrega Presupuesto</ion-label>
         <ion-input type="number" placeholder="Ingresar Monto" [(ngModel)]="newPresupuesto"></ion-input>
       </ion-item>
 
-      <ion-item>
+      <ion-item lines="none">
         <ion-button
         slot="start"
         size="default"
@@ -48,20 +49,21 @@
         </ion-button>
       </ion-item>
 
-      <!-- TODO arreglar underline de boton reiniciar.
-      TODO mensaje que se agrego presu
-      TODO mensaje que se reinicio presu
+      <!--
       TODO separar Historial -->
 
     </ion-card-content>
   </ion-card>
 
-  <ion-list>
+  <!-- HISTORIAL -->
+  <ion-list >
     <ion-list-header>
       <ion-label>Historial</ion-label>
     </ion-list-header>
     <ion-item *ngFor="let item of storageService.localHistory">
-      <ion-label>{{item.value | currency }} - {{item.desc}} - {{item.date | date :'short'}} </ion-label>
+      <!-- <ion-label>{{item.value | currency }} - {{item.desc}} - {{item.date | date :'short'}} </ion-label> -->
+      <ion-label> {{item.desc}}, {{item.date | date :'short'}} </ion-label>
+      <ion-label slot="end">{{item.value | currency }} </ion-label>
     </ion-item>
 
   </ion-list>

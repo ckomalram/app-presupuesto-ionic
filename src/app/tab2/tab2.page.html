@@ -7,11 +7,57 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Ingresar Gastos</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <!-- AGREGAR PRESUPUESTO -->
+  <ion-card class="ion-no-margin ion-padding">
+    <ion-card-header>
+      <ion-item>
+        <ion-chip slot="start" color="success">
+          <ion-icon  name="cash"></ion-icon>
+          <ion-label>{{storageService.localPresupuesto | currency}}</ion-label>
+        </ion-chip>
+        <ion-chip  color="danger">
+          <ion-icon  name="remove-circle"></ion-icon>
+          <ion-label>{{storageService.localDebito | currency }}</ion-label>
 
-  <p>Ingresar Gastos</p>
+        </ion-chip>
+      </ion-item>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item >
+        <ion-label position="stacked">Descripción de gasto</ion-label>
+        <ion-input type="text" maxlength="30" placeholder="Ex: Comida" [(ngModel)]="detalleGasto"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Monto utilizado</ion-label>
+        <ion-input type="number" placeholder="Ingresar Monto" [(ngModel)]="montoDebito"></ion-input>
+      </ion-item>
+
+      <ion-button
+      expand="block"
+       (click)="agregarGastos()"
+      [disabled]="montoDebito === 0 || montoDebito === null || detalleGasto=== null"
+      >
+      <ion-icon slot="start" name="add"></ion-icon>
+        Agregar
+      </ion-button>
+
+      <!-- TODO arreglar underline de boton reiniciar.
+      TODO mensaje que se agrego presu
+      TODO mensaje que se reinicio presu
+      TODO separar Historial -->
+    </ion-card-content>
+  </ion-card>
+
+  <!-- LISTA DE GASTOS AGREGADOS -->
+    <ion-list >
+      <ion-list-header>
+        <ion-label>Lista de Gastos</ion-label>
+      </ion-list-header>
+      <ion-item *ngFor="let gasto of storageService.localGastos" lines="full">
+        <ion-icon name="alert" slot="start"></ion-icon>
+        <ion-label> {{gasto.desc}} </ion-label>
+        <ion-label slot="end">{{gasto.monto | currency }} </ion-label>
+      </ion-item>
+
+    </ion-list>
 </ion-content>

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">app-presupuesto</string>
-    <string name="title_activity_main">app-presupuesto</string>
-    <string name="package_name">com.komalramtec.presupuesto</string>
-    <string name="custom_url_scheme">com.komalramtec.presupuesto</string>
+    <string name="app_name">admin-gastos</string>
+    <string name="title_activity_main">admin-gastos</string>
+    <string name="package_name">com.komalramtec.gastos</string>
+    <string name="custom_url_scheme">com.komalramtec.gastos</string>
 </resources>

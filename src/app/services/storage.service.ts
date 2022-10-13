@@ -6,7 +6,9 @@ import { Storage } from '@ionic/storage-angular';
 })
 export class StorageService {
   public localPresupuesto;
+  public localDebito;
   public localHistory: any[] = [];
+  public localGastos: any[] = [];
 
   private storage: Storage | null = null;
 
@@ -19,8 +21,11 @@ export class StorageService {
     this.storage = storageIns;
     await this.loadHistory();
     await this.loadPresupuesto();
+    await this.loadGastos();
+    await this.loadDebito();
   }
 
+  //Cargas de datos
   async loadHistory() {
     try {
       const history = await this.storage.get('history');
@@ -42,6 +47,28 @@ export class StorageService {
     }
   }
 
+  async loadDebito() {
+    try {
+      const debito = await this.storage.get('debito');
+      console.log('Cargando debito', debito);
+
+      this.localDebito = debito || 0;
+    } catch (error) {
+      this.localDebito = 0;
+    }
+  }
+
+  async loadGastos() {
+    try {
+      const gastos = await this.storage.get('gastos');
+      console.log('Cargando History', gastos);
+      this.localGastos = gastos || [];
+    } catch (error) {
+      this.localGastos = [];
+    }
+  }
+
+  //Salvar en local storage
   async saveHistory(newDataHistory: any) {
 
     let newHistory = await this.storage.get('history') || [];
@@ -56,13 +83,30 @@ export class StorageService {
    this.localPresupuesto=  await this.storage.set('presupuesto', acumulado);
   }
 
+  async saveGasto(newDataGasto: any) {
+
+    let newGasto = await this.storage.get('gastos') || [];
+    newGasto = [...newGasto, newDataGasto];
+    console.log(newGasto);
+
+    let newDebito = await this.storage.get('debito') || 0;
+    newDebito = newDebito + newDataGasto.monto;
+
+    this.localDebito = await this.storage.set('debito', newDebito);
+    this.localGastos = await this.storage.set('gastos', newGasto);
+  }
+
    remove() {
     Promise.all([
       this.storage.remove('presupuesto'),
       this.storage.remove('history'),
+      this.storage.remove('gastos'),
+      this.storage.remove('debito'),
     ]);
 
     this.loadHistory();
     this.loadPresupuesto();
+    this.loadGastos();
+    this.loadDebito();
   }
 }

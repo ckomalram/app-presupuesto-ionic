@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 import { StorageService } from '../services/storage.service';
 
 
@@ -17,6 +17,7 @@ export class Tab1Page {
 
   constructor(
     private alertController: AlertController,
+    private toatCtrl: ToastController,
     public storageService: StorageService) {
     //TODO: Si existe data, presupuesto en localstorage, cargarlo. Sino 0.
     this.newPresupuesto = null;
@@ -39,6 +40,8 @@ export class Tab1Page {
     await this.storageService.saveHistory(newData);
     this.newPresupuesto = null;
     this.detalle= null;
+
+    this.presentToast('top', 'Presupuesto agregado');
   }
 
   resetPresupuesto() {
@@ -66,6 +69,7 @@ export class Tab1Page {
           handler: () => {
             this.handlerMessage = 'Alert confirmed';
             this.resetPresupuesto();
+            this.presentToast('top', 'Datos removidos');
           },
         },
       ],
@@ -76,4 +80,16 @@ export class Tab1Page {
     const { role } = await alert.onDidDismiss();
     this.roleMessage = `Dismissed with role: ${role}`;
   }
+
+  async presentToast(position: 'top' | 'middle' | 'bottom' , message) {
+    const toast = await this.toatCtrl.create({
+      message,
+      duration: 1500,
+      position
+    });
+
+    await toast.present();
+  }
+
+
 }

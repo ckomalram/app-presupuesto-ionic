@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.komalramtec.presupuesto',
-  appName: 'app-presupuesto',
+  appId: 'com.komalramtec.gastos',
+  appName: 'admin-gastos',
   webDir: 'www',
   bundledWebRuntime: false
 };
