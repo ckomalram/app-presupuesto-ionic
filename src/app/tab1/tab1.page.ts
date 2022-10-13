@@ -1,48 +1,40 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss']
+  styleUrls: ['tab1.page.scss'],
 })
 export class Tab1Page {
-
-  presupuesto: number;
   newPresupuesto: number;
-  dataPresupuesto: any[];
 
-  constructor() {
-
+  constructor(public storageService: StorageService) {
     //TODO: Si existe data, presupuesto en localstorage, cargarlo. Sino 0.
-    this.presupuesto = 0;
-    this.newPresupuesto= null;
-    this.dataPresupuesto=[];
+    this.newPresupuesto = null;
   }
 
 
-  agregarPresupuesto(){
+  async agregarPresupuesto() {
     console.log('Agregando Presupuesto', this.newPresupuesto);
-    this.presupuesto+=this.newPresupuesto;
+   await this.storageService.savePresupuesto(this.newPresupuesto);
 
-    const newDate= new Date();
+     const newDate = new Date();
 
     const newData = {
-      desc: 'Nueva quincena',
+      desc: 'Quincena',
       value: this.newPresupuesto,
-      date: newDate
+      date: newDate,
     };
-    this.dataPresupuesto.push(newData);
-    this.newPresupuesto = null;
 
-    console.log(this.dataPresupuesto);
+    await this.storageService.saveHistory(newData);
+    this.newPresupuesto = null;
   }
 
-  resetPresupuesto(){
+  resetPresupuesto() {
     console.log('Resetear Presupuesto');
-    this.presupuesto = 0;
     this.newPresupuesto = null;
-    this.dataPresupuesto=[];
+    this.storageService.remove();
   }
-
 }

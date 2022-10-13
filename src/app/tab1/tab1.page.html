@@ -7,7 +7,7 @@
 <ion-content [fullscreen]="true">
   <ion-card class="ion-no-margin ion-padding"  >
     <ion-card-header>
-      <ion-card-title color="success">{{presupuesto | currency}}</ion-card-title>
+      <ion-card-title color="success">{{storageService.localPresupuesto | currency}}</ion-card-title>
       <ion-card-subtitle >Presupuesto total</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
@@ -40,7 +40,7 @@
     <ion-list-header>
       <ion-label>Historial</ion-label>
     </ion-list-header>
-    <ion-item *ngFor="let item of dataPresupuesto">
+    <ion-item *ngFor="let item of storageService.localHistory">
       <ion-label>{{item.value | currency }} - {{item.desc}} - {{item.date | date :'short'}} </ion-label>
     </ion-item>
 
