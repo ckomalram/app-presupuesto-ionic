@@ -20,19 +20,39 @@
       </ion-item>
 
 
-      <ion-item class="ion-padding">
+      <ion-item >
+        <ion-label position="stacked">Descripción</ion-label>
+        <ion-input type="text" maxlength="10" placeholder="Ingresa detalle" [(ngModel)]="detalle"></ion-input>
+      </ion-item>
+      <ion-item>
         <ion-label position="stacked">Agrega Presupuesto</ion-label>
         <ion-input type="number" placeholder="Ingresar Monto" [(ngModel)]="newPresupuesto"></ion-input>
       </ion-item>
 
-      <ion-button (click)="agregarPresupuesto()" expand="block" shape="round"
-      [disabled]="newPresupuesto === 0 || newPresupuesto === null"
-      >
-        Aceptar
-      </ion-button>
-      <ion-button (click)="resetPresupuesto()" expand="block" shape="round" color="danger">
-        Reiniciar
-      </ion-button>
+      <ion-item>
+        <ion-button
+        slot="start"
+        size="default"
+         (click)="agregarPresupuesto()"
+        [disabled]="newPresupuesto === 0 || newPresupuesto === null"
+        >
+          Aceptar
+        </ion-button>
+        <ion-button
+        slot="end"
+        size="default"
+        (click)="presentAlert()"
+        [disabled]="!storageService.localPresupuesto"
+        color="danger">
+          Reiniciar
+        </ion-button>
+      </ion-item>
+
+      <!-- TODO arreglar underline de boton reiniciar.
+      TODO mensaje que se agrego presu
+      TODO mensaje que se reinicio presu
+      TODO separar Historial -->
+
     </ion-card-content>
   </ion-card>
 
